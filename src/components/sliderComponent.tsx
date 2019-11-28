@@ -1,21 +1,27 @@
-import React, { ReactElement, useState, useEffect } from "react";
-import { Card } from "@material-ui/core";
+import React, { ReactElement, useState } from "react";
+import { Card, Grid } from "@material-ui/core";
 import SliderItem from "./sliderItem";
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { currencies } from '../constants/currency';
 
 const SliderComponent: React.FC = ({}): ReactElement => {
-  const currencies = [
-    { base: "GBP", exchange: "EUR", flag: "GB" },
-    { base: "CHF", exchange: "USD", flag: "CH" },
-    { base: "USD", exchange: "GBP", flag: "US" }
-  ];
   const [activIndex, setActivIndex] = useState(0);
   return (
     <Card>
-      <SliderItem
-        flag={currencies[activIndex].flag}
-        currencyBase={currencies[activIndex].base}
-        currencyExchange={currencies[activIndex].exchange}
-      />
+        <Grid container direction="row" alignItems="center" justify="center">
+            <div onClick={(event) => console.log("left")}>
+                <ChevronLeftIcon fontSize='large'/>
+            </div>
+            <SliderItem
+                flag={currencies[activIndex].flag}
+                currencyBase={currencies[activIndex].base}
+                currencyExchange={currencies[activIndex].exchange}
+            />
+            <div onClick={(event) => console.log("droite")}>
+                <ChevronRightIcon fontSize='large' />
+            </div>
+        </Grid>
     </Card>
   );
 };

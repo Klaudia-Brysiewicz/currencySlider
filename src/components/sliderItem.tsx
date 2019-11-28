@@ -27,7 +27,7 @@ const SliderItem: React.FC<SliderItemProps> = ({
   useEffect(() => {
     fetchCurrencyAPI();
   }, []);
-  console.log(currency);
+  console.log("here");
   if (!currency) return null;
   if (hasError) return <div>there is a problem with data fetch</div>;
   return (
