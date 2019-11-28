@@ -1,6 +1,6 @@
 import React, { ReactElement, useState, useEffect } from "react";
 import { CardContent } from "@material-ui/core";
-import { Currency } from '../types/global';
+import { Currency } from "../types/global";
 
 interface SliderItemProps {
   currencyBase: string;
@@ -11,7 +11,7 @@ interface SliderItemProps {
 const SliderItem: React.FC<SliderItemProps> = ({
   currencyBase,
   currencyExchange,
-  flag,
+  flag
 }): ReactElement | null => {
   const [hasError, setErrors] = useState(false);
   const [currency, setCurrencies] = useState<Currency | null>(null);
@@ -24,21 +24,21 @@ const SliderItem: React.FC<SliderItemProps> = ({
       .then((res: any) => setCurrencies(res))
       .catch((err: any) => setErrors(err));
   }
-  console.log(currency)
+  console.log(currency);
   useEffect(() => {
     fetchCurrencyAPI();
   }, [currencyBase]);
   if (!currency) return null;
   if (hasError) return <div>there is a problem with data fetch</div>;
   return (
-    <div>
-      <img
-        style={styles.flag}
-        src={`${process.env.REACT_APP_FLAG_API}/${flag}/flat/64.png`}
-      />
+    <div
+      style={{
+        ...styles.flag,
+        backgroundImage: `url(${process.env.REACT_APP_FLAG_API}/${flag}/flat/64.png)`
+      }}
+    >
       <CardContent>
-        {currency.base} - {" "}
-        {currency.rates[currencyExchange].toFixed(2)}{" "}
+        {currency.base} - {currency.rates[currencyExchange].toFixed(2)}{" "}
         {currencyExchange}
       </CardContent>
     </div>
@@ -47,8 +47,10 @@ const SliderItem: React.FC<SliderItemProps> = ({
 
 const styles = {
   flag: {
-    width: "100%",
-    height: "100%"
+    minHeight: "300px",
+    minWidth: "300px",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
   }
 };
 
