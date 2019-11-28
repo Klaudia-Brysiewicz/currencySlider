@@ -1,6 +1,5 @@
 import React, { ReactElement, useState, useEffect } from "react";
-import { Card, CardContent } from "@material-ui/core";
-
+import { CardContent } from "@material-ui/core";
 interface SliderItemProps {
   currencyBase: string;
   currencyExchange: string;
@@ -10,11 +9,10 @@ interface SliderItemProps {
 const SliderItem: React.FC<SliderItemProps> = ({
   currencyBase,
   currencyExchange,
-  flag
+  flag,
 }): ReactElement | null => {
   const [hasError, setErrors] = useState(false);
   const [currency, setCurrencies] = useState(null);
-
   async function fetchCurrencyAPI() {
     const res = await fetch(
       `${process.env.REACT_APP_CURRENCY_API}/latest?base=${currencyBase}`
@@ -26,8 +24,7 @@ const SliderItem: React.FC<SliderItemProps> = ({
   }
   useEffect(() => {
     fetchCurrencyAPI();
-  }, []);
-  console.log("here", currency);
+  }, [currencyBase]);
   if (!currency) return null;
   if (hasError) return <div>there is a problem with data fetch</div>;
   return (
@@ -38,7 +35,7 @@ const SliderItem: React.FC<SliderItemProps> = ({
       />
       <CardContent>
         {currency.base} - {" "}
-        {Number.parseFloat(currency.rates[currencyExchange]).toFixed(2)}
+        {Number.parseFloat(currency.rates[currencyExchange]).toFixed(2)}{" "}
         {currencyExchange}
       </CardContent>
     </div>
