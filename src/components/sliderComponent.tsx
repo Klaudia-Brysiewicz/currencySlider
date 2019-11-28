@@ -4,21 +4,19 @@ import SliderItem from "./sliderItem";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { currencies } from '../constants/currency';
+import { getIndex } from '../utils/helpers';
 
 const SliderComponent: React.FC = (): ReactElement => {
   const [activIndex, setActivIndex] = useState(0);
   const previousSlide = () => {
-    const lastIndex = currencies.length - 1;
-    const shouldResetIndex = activIndex === 0;
-    const index =  shouldResetIndex ? lastIndex : activIndex - 1;
+    const index = getIndex("left", currencies, activIndex);
     setActivIndex(index);
-  }
+  };
   const nextSlide = () => {
-    const lastIndex = currencies.length - 1;
-    const shouldResetIndex = activIndex === lastIndex;
-    const index =  shouldResetIndex ? 0 : activIndex + 1;
+    const index = getIndex("right", currencies, activIndex);
     setActivIndex(index);
-  }
+  };
+  
   return (
     <Card>
         <Grid container direction="row" alignItems="center" justify="center">
