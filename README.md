@@ -1,5 +1,5 @@
 
-This project presents simple application of slider. You can switch to right or left to see currency exchange rates for some countries. To add custom countries please modify currencies constants in constants folder. this app use Material UI [https://material-ui.com/], Foreign exchange rates API [https://exchangeratesapi.io/] and  country Flags API [https://www.countryflags.io/]
+This project presents simple application of slider. You can switch to right or left to see currency exchange rates for some countries. To add custom countries please modify currencies constants in constants folder. this app use [Material UI](https://material-ui.com/), [Foreign exchange rates API](https://exchangeratesapi.io/) and  [country Flags API](https://www.countryflags.io/)
 
 ## Available Scripts
 
