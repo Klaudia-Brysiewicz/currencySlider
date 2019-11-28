@@ -1,31 +1,21 @@
 import React, { ReactElement, useState, useEffect } from "react";
-import { Card, CardContent, CardMedia } from "@material-ui/core";
+import { Card } from "@material-ui/core";
+import SliderItem from "./sliderItem";
 
-const SliderComponent: React.FC = ({}): ReactElement | null=> {
-  const [hasError, setErrors] = useState(false);
-  const [currency, setCurrencies] = useState(null);
-
-  async function fetchCurrencyAPI() {
-    const res = await fetch(`${process.env.REACT_APP_CURRENCY_API}/latest?base=USD`);
-    res
-      .json()
-      .then((res: any) => setCurrencies(res))
-      .catch((err: any) => setErrors(err));
-  }
-  useEffect(() => {
-    fetchCurrencyAPI();
-  }, []);
-  console.log(currency);
-  if (!currency) return null;
-  if (hasError) return <div>there is a problem with data fetch</div>;
+const SliderComponent: React.FC = ({}): ReactElement => {
+  const currencies = [
+    { base: "GBP", exchange: "EUR", flag: "GB" },
+    { base: "CHF", exchange: "USD", flag: "CH" },
+    { base: "USD", exchange: "GBP", flag: "US" }
+  ];
+  const [activIndex, setActivIndex] = useState(0);
   return (
     <Card>
-        <CardMedia
-            src={`${process.env.REACT_APP_FLAG_API}/US/flat/64.png`}
-        />
-      <CardContent>
-        {currency.base} {currency.rates.GBP}
-      </CardContent>
+      <SliderItem
+        flag={currencies[activIndex].flag}
+        currencyBase={currencies[activIndex].base}
+        currencyExchange={currencies[activIndex].exchange}
+      />
     </Card>
   );
 };
