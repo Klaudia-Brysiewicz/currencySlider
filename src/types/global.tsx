@@ -3,3 +3,8 @@ export interface Slide {
     exchange: string;
     flag: string;
 }
+export interface Currency {
+    base: string;
+    date: string;
+    rates: Record<string, number>;
+}

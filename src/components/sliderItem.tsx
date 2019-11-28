@@ -1,5 +1,7 @@
 import React, { ReactElement, useState, useEffect } from "react";
 import { CardContent } from "@material-ui/core";
+import { Currency } from '../types/global';
+
 interface SliderItemProps {
   currencyBase: string;
   currencyExchange: string;
@@ -12,7 +14,7 @@ const SliderItem: React.FC<SliderItemProps> = ({
   flag,
 }): ReactElement | null => {
   const [hasError, setErrors] = useState(false);
-  const [currency, setCurrencies] = useState(null);
+  const [currency, setCurrencies] = useState<Currency | null>(null);
   async function fetchCurrencyAPI() {
     const res = await fetch(
       `${process.env.REACT_APP_CURRENCY_API}/latest?base=${currencyBase}`
@@ -22,6 +24,7 @@ const SliderItem: React.FC<SliderItemProps> = ({
       .then((res: any) => setCurrencies(res))
       .catch((err: any) => setErrors(err));
   }
+  console.log(currency)
   useEffect(() => {
     fetchCurrencyAPI();
   }, [currencyBase]);
@@ -35,7 +38,7 @@ const SliderItem: React.FC<SliderItemProps> = ({
       />
       <CardContent>
         {currency.base} - {" "}
-        {Number.parseFloat(currency.rates[currencyExchange]).toFixed(2)}{" "}
+        {currency.rates[currencyExchange].toFixed(2)}{" "}
         {currencyExchange}
       </CardContent>
     </div>
